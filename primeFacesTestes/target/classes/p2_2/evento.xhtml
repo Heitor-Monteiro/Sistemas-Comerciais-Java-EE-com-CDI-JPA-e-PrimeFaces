@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>2.2</title>
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<p:messages />
+
+		<p:panelGrid columns="2">
+
+			<p:outputLabel for="nome" value="Nome:" />
+			<p:inputText id="nome" value="#{MBinb.nome}">
+				<p:ajax update="nomeInvertido" listener="#{MBinb.inverter}" />
+			</p:inputText>
+
+			<p:outputLabel for="nome2" value="Nome:" />
+			<p:inputText id="nome2" value="#{MBinb.nome}">
+				<p:ajax update="nomeInvertido" listener="#{MBinb.inverter}"
+					event="keyup" />
+			</p:inputText>
+
+		</p:panelGrid>
+
+
+		<p:tooltip for="nome"
+			value="Nome invertido é atualizado quando se clica fora."
+			showEvent="focus" hideEvent="blur" />
+		<p:tooltip for="nome2"
+			value="Nome invertido é atualizado quando teclar caracteres."
+			showEvent="focus" hideEvent="blur" />
+
+		<br />
+
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Nome invertido:" />
+			<p:outputLabel id="nomeInvertido" value="#{MBinb.nomeInvertido}" />
+		</p:panelGrid>
+
+	</h:form>
+
+	<br />
+
+	<p:separator />
+	<p:link value="Telas inicial" outcome="/index" />
+
+</h:body>
+</html>
