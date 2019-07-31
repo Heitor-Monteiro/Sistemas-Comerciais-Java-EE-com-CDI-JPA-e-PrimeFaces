@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>2.5</title>
+
+	<style>
+.ajax-status {
+	position: fixed;
+	right: 10px;
+	top: 60px;
+}
+</style>
+
+</h:head>
+<h:body>
+	<h:form id="frm">
+		<p:ajaxStatus styleClass="ajax-status">
+			<f:facet name="start">
+				<h:graphicImage library="imagens" name="carregando.gif" />
+			</f:facet>
+			<f:facet name="complete">
+				<h:outputLabel value="" />
+			</f:facet>
+		</p:ajaxStatus>
+
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panelGrid columns="2">
+			<p:outputLabel for="login" value="Login" />
+			<p:inputText id="login" value="#{MBcub2.login}" required="true">
+				<p:ajax listener="#{MBcub2.verificarDisponibilidadeLogin}" />
+			</p:inputText>
+
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" value="#{MBcub2.nome}" required="true" />
+		</p:panelGrid>
+
+		<p:commandButton value="Cadastrar" action="#{MBcub2.cadastrar}" />
+	</h:form>
+
+	<p:separator />
+	<p:link value="Telas inicial" outcome="/index" />
+
+</h:body>
+</html>
