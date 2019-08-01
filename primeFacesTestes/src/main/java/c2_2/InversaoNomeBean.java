@@ -1,4 +1,4 @@
-package tela2_2;
+package c2_2;
 
 import java.io.Serializable;
 
