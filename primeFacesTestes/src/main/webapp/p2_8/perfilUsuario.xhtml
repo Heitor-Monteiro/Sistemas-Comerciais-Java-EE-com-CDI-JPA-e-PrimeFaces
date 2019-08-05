@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>2.8</title>
+
+	<script>
+		PrimeFaces.locales['pt_BR'] = {
+			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			weekNumberTitle : 'Sm',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			currentText : 'Começo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+	</script>
+</h:head>
+<h:body>
+	<h:form id="frm">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel value="1ª exemplo calendar:" />
+			</f:facet>
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" value="#{MBpub3.nome}" required="true" />
+
+			<p:outputLabel for="dataNascimento" value="Data de nascimento" />
+			<p:calendar id="dataNascimento" value="#{MBpub3.dataNacimento}"
+				required="true" pattern="dd/MM/yyyy" navigator="false" pages="1"
+				mode="popup" locale="pt_BR" />
+		</p:panelGrid>
+		<br />
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel value="2ª exemplo calendar com hora:" />
+			</f:facet>
+			<p:outputLabel for="dataNascimento2" value="Data de nascimento" />
+			<p:calendar id="dataNascimento2" value="#{MBpub3.dataNacimento}"
+				required="true" pattern="dd/MM/yyyy HH:mm:ss" />
+		</p:panelGrid>
+		<br />
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel
+					value="3ª exemplo calendar com bloqueio de digitação:" />
+			</f:facet>
+			<p:outputLabel for="dataNascimento3" value="Data de nascimento" />
+			<p:calendar id="dataNascimento3" value="#{MBpub3.dataNacimento}"
+				required="true" pattern="dd/MM/yyyy" readonlyInput="true" />
+		</p:panelGrid>
+		<br />
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel value="4ª exemplo calendar com navegação habilitada:" />
+			</f:facet>
+			<p:outputLabel for="dataNascimento4" value="Data de nascimento" />
+			<p:calendar id="dataNascimento4" value="#{MBpub3.dataNacimento}"
+				required="true" pattern="dd/MM/yyyy" navigator="true" />
+		</p:panelGrid>
+		<br />
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel value="5ª exemplo calendar com data máxima:" />
+			</f:facet>
+			<p:outputLabel for="dataNascimento5" value="Data de nascimento" />
+			<p:calendar id="dataNascimento5" value="#{MBpub3.dataNacimento}"
+				required="true" pattern="dd/MM/yyyy" maxdate="#{MBpub3.dataHoje}" />
+		</p:panelGrid>
+		<br />
+		<p:commandButton value="Atualizar" action="#{MBpub3.atualizar}"
+			update="@form" />
+	</h:form>
+
+	<p:separator />
+	<p:link value="Telas inicial" outcome="/index" />
+
+</h:body>
+</html>
