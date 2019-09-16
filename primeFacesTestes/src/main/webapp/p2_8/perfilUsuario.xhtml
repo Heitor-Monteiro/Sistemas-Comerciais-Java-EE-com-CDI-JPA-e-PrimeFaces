@@ -97,6 +97,15 @@
 				required="true" pattern="dd/MM/yyyy" maxdate="#{MBpub3.dataHoje}" />
 		</p:panelGrid>
 		<br />
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				<p:outputLabel value="6ª exemplo calendar com data mínima:" />
+			</f:facet>
+			<p:outputLabel for="dataNascimento6" value="Data de nascimento" />
+			<p:calendar id="dataNascimento6" value="#{MBpub3.dataNacimento}"
+				required="true" pattern="dd/MM/yyyy" mindate="#{MBpub3.dataHoje}" />
+		</p:panelGrid>
+		<br />
 		<p:commandButton value="Atualizar" action="#{MBpub3.atualizar}"
 			update="@form" />
 	</h:form>
