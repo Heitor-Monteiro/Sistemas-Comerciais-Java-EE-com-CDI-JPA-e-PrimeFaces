@@ -37,7 +37,9 @@ public class PerfilUsuarioBean4 implements Serializable {
 
 	public void atualizar() {
 		System.out.println("Profissão:" + this.profissao);
-		System.out.println("Interesse:" + this.interesse.getDescricao());
+		if (this.interesse != null) {
+			System.out.println("Interesse:" + this.interesse.getDescricao());
+		}
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Perfil atualizado!"));
 	}
 
