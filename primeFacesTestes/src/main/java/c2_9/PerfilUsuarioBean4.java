@@ -3,7 +3,6 @@ package c2_9;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -36,7 +35,9 @@ public class PerfilUsuarioBean4 implements Serializable {
 	}
 
 	public void atualizar() {
-		System.out.println("Profissão:" + this.profissao);
+		if (this.profissao != null) {
+			System.out.println("Profissão:" + this.profissao);
+		}
 		if (this.interesse != null) {
 			System.out.println("Interesse:" + this.interesse.getDescricao());
 		}
