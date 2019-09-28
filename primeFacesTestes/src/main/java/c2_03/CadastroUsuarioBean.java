@@ -1,4 +1,4 @@
-package c2_5;
+package c2_03;
 
 import java.io.Serializable;
 
@@ -8,9 +8,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean(name = "MBcub2")
+@ManagedBean(name = "MBcub")
 @ViewScoped
-public class CadastroUsuarioBean2 implements Serializable {
+public class CadastroUsuarioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String login;
@@ -31,12 +31,6 @@ public class CadastroUsuarioBean2 implements Serializable {
 
 	public void verificarDisponibilidadeLogin() {
 		FacesMessage msg = null;
-		// Simular demora no processamento.
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO: handle exception
-		}
 		if ("João".equalsIgnoreCase(login)) {
 			msg = new FacesMessage("Login já está em uso.");
 			msg.setSeverity(FacesMessage.SEVERITY_WARN);

@@ -1,4 +1,4 @@
-package c2_2;
+package c2_02;
 
 import java.io.Serializable;
 
