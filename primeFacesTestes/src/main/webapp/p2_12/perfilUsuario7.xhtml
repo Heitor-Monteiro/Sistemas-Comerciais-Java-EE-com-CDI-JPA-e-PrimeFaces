@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>2.12</title>
+</h:head>
+<h:body>
+	<h:form id="frm">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panelGrid columns="2">
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" required="true" value="#{MBpub5.nome}" />
+
+			<p:outputLabel for="estado" value="Estado" />
+			<p:selectOneMenu id="estado" value="#{MBpub5.estado}">
+				<p:ajax event="change" process="@this" update="cidade"
+					listener="#{MBpub5.carregarCidades}" />
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{MBpub5.estados}" var="estado"
+					itemLabel="#{estado}" itemValue="#{estado}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="cidade" value="Cidade" />
+			<p:selectOneMenu id="cidade" value="#{MBpub5.cidade}">
+				<f:selectItem itemLabel="Selecione" />
+				<f:selectItems value="#{MBpub5.cidades}" var="cidade"
+					itemLabel="#{cidade}" itemValue="#{cidade}" />
+			</p:selectOneMenu>
+		</p:panelGrid>
+
+		<br />
+		<p:commandButton value="Atualizar" action="#{MBpub5.atualizar}"
+			update="@form" />
+	</h:form>
+
+	<p:separator />
+	<p:link value="Telas inicial" outcome="/index" />
+
+</h:body>
+</html>
