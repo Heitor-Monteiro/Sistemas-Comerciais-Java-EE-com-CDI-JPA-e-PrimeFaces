@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>2.17</title>
+</h:head>
+<h:body>
+	<h:form id="frm">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+		<p:panelGrid columns="2">
+			<p:outputLabel for="nome" value="Nome" />
+			<p:inputText id="nome" required="true" value="#{MBpub10.nome}" />
+
+			<p:outputLabel for="telefone" value="Telefone" />
+			<p:inputMask id="telefone" value="#{MBpub10.telefone}"
+				mask="(99) 9999-9999" />
+
+			<p:outputLabel for="telefoneComercial" value="Telefone comercial" />
+			<p:inputMask id="telefoneComercial"
+				value="#{MBpub10.telefoneComercial}" mask="(99) 9999-9999? x9999" />
+
+			<p:outputLabel for="matricula" value="Matrícula" />
+			<p:inputMask id="matricula" value="#{MBpub10.matricula}"
+				mask="aaa*-9999" />
+		</p:panelGrid>
+
+		<br />
+		<p:commandButton value="Atualizar" action="#{MBpub10.atualizar}"
+			update="@form" />
+	</h:form>
+
+	<p:separator />
+	<p:link value="Telas inicial" outcome="/index" />
+
+</h:body>
+</html>
