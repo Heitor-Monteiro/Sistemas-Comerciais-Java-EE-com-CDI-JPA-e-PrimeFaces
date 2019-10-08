@@ -15,6 +15,10 @@ import javax.faces.bean.ViewScoped;
 public class FuncionariosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private String paginatorPosition = "both";
+	private String rowsPerPageTemplate = "10,20,30";
+	private String totalDeItens = "50";
+	private boolean paginatorAlwaysVisible = true;
 
 	private static final String[] nomes = { "João", "Maria", "José", "Eduardo", "Sebastião", "Mariana", "Francisco",
 			"Manoel", "Fernanda", "Gabriela", "Mário", "Marcos" };
@@ -25,9 +29,13 @@ public class FuncionariosBean implements Serializable {
 	private List<Funcionario> funcionarios;
 
 	public FuncionariosBean() throws ParseException {
+		gerarFuncionarios();
+	}
+
+	public void gerarFuncionarios() {
 		funcionarios = new ArrayList<>();
 
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < Integer.parseInt(totalDeItens); i++) {
 			adicionarFuncionario();
 		}
 	}
@@ -66,4 +74,35 @@ public class FuncionariosBean implements Serializable {
 		return funcionarios;
 	}
 
+	public String getPaginatorPosition() {
+		return paginatorPosition;
+	}
+
+	public void setPaginatorPosition(String paginatorPosition) {
+		this.paginatorPosition = paginatorPosition;
+	}
+
+	public String getRowsPerPageTemplate() {
+		return rowsPerPageTemplate;
+	}
+
+	public void setRowsPerPageTemplate(String rowsPerPageTemplate) {
+		this.rowsPerPageTemplate = rowsPerPageTemplate;
+	}
+
+	public boolean isPaginatorAlwaysVisible() {
+		return paginatorAlwaysVisible;
+	}
+
+	public void setPaginatorAlwaysVisible(boolean paginatorAlwaysVisible) {
+		this.paginatorAlwaysVisible = paginatorAlwaysVisible;
+	}
+
+	public String getTotalDeItens() {
+		return totalDeItens;
+	}
+
+	public void setTotalDeItens(String totalDeItens) {
+		this.totalDeItens = totalDeItens;
+	}
 }
