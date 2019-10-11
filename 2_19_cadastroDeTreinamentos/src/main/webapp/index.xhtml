@@ -3,80 +3,110 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>2.19 Cadastro de treinamentos</title>
+	<title>Cadastro de treinamentos</title>
 </h:head>
 <h:body>
+
+	<p:outputLabel value="Cadastro de contrato de treinamentos"
+		style="font-size: 25px; font-weight: 500;" />
+
+	<br />
+	<p:separator />
+	<br />
+
 	<h:form id="frm">
 		<p:messages>
 			<p:autoUpdate />
 		</p:messages>
 
-		<p:panelGrid columns="2">
-			<p:outputLabel for="razaoSocial" value="Razão social" />
-			<p:inputText id="razaoSocial" required="true" maxlength="99"
-				value="#{MBcdt.razaoSocial}" />
+		<p:tabView dynamic="false" cache="true">
 
-			<p:outputLabel for="cnpj" value="CNPJ" />
-			<p:inputMask id="cnpj" required="true" mask="99.999.999/9999-99"
-				value="#{MBcdt.cnpj}" />
+			<p:tab title="Dados principais">
+				<h:panelGrid columns="2" cellspacing="15">
+					<p:outputLabel for="razaoSocial" value="Razão social" />
+					<p:inputText id="razaoSocial" required="true" maxlength="99"
+						value="#{MBcdt.treinamento.cliente.razaoSocial}" />
 
-			<p:outputLabel for="cidadeDoContrato" value="Cidade do contrato" />
-			<p:autoComplete id="cidadeDoContrato" required="true"
-				value="#{MBcdt.cidadeDoContrato}"
-				completeMethod="#{MBcdt.sugerirCidades}" dropdown="true"
-				var="cidade" itemLabel="#{cidade.nomeCidade}" itemValue="#{cidade}"
-				converter="cidade" forceSelection="true" />
+					<p:outputLabel for="cnpj" value="CNPJ" />
+					<p:inputMask id="cnpj" required="true" mask="99.999.999/9999-99"
+						value="#{MBcdt.treinamento.cliente.cnpj}" />
 
-			<p:outputLabel for="modalidade" value="Modalidade" />
-			<p:selectOneRadio id="modalidade" required="true"
-				value="#{MBcdt.modalidade}">
-				<f:selectItem itemLabel="EAD" itemValue="0" />
-				<f:selectItem itemLabel="Presencial" itemValue="1" />
-			</p:selectOneRadio>
+					<p:outputLabel for="cidadeDoContrato" value="Cidade do contrato" />
+					<p:autoComplete id="cidadeDoContrato" required="true"
+						value="#{MBcdt.treinamento.contrato.cidadeDoContrato}"
+						completeMethod="#{MBcdt.sugerirCidades}" dropdown="true"
+						var="cidade" itemLabel="#{cidade.nomeCidade}"
+						itemValue="#{cidade}" converter="cidade" forceSelection="true" />
 
-			<p:outputLabel for="dataDoContrato" value="Data do contrato" />
-			<p:calendar id="dataDoContrato" required="true" mask="true"
-				pattern="dd-MM-yyyy" value="#{MBcdt.dataDoContrato}" />
+					<p:outputLabel for="modalidade" value="Modalidade" />
+					<p:selectOneRadio id="modalidade" required="true"
+						value="#{MBcdt.treinamento.contrato.modalidade}">
+						<f:selectItem itemLabel="EAD" itemValue="EAD" />
+						<f:selectItem itemLabel="Presencial" itemValue="Presencial" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+			</p:tab>
 
-			<p:outputLabel for="valorDoContrato" value="Valor do contrato" />
-			<p:inputNumber id="valorDoContrato" required="true" symbol="R$ "
-				decimalSeparator="," thousandSeparator="."
-				value="#{MBcdt.valorDoContrato}" />
+			<p:tab title="Cursos">
+				<h:panelGrid columns="1">
+					<p:outputLabel for="cursosContratados" value="Cursos contratados" />
+					<p:selectManyCheckbox id="cursosContratados" layout="responsive"
+						columns="1" required="true" converter="curso"
+						value="#{MBcdt.treinamento.contrato.cursosSelecionados}">
+						<p:ajax event="change" process="@this" update="valorDoContrato" />
+						<f:selectItems value="#{MBcdt.CURSOS}" var="curso"
+							itemLabel="#{curso.nomeCurso} (R$ #{curso.valorCurso})"
+							itemValue="#{curso}" />
+					</p:selectManyCheckbox>
+				</h:panelGrid>
+			</p:tab>
 
-			<p:outputLabel for="metodoDePagamento" value="Método de pagamento" />
-			<p:selectOneMenu id="metodoDePagamento" required="true"
-				value="#{MBcdt.metodoDePagamento}">
-				<p:ajax event="change" process="@this" update="formaDePagamento"
-					listener="#{MBcdt.carregarFormaDePagamento}" />
-				<f:selectItem itemLabel="Selecione" itemValue="" />
-				<f:selectItem itemLabel="Cartão de credito" itemValue="1" />
-				<f:selectItem itemLabel="Cheque" itemValue="2" />
-				<f:selectItem itemLabel="Boleto" itemValue="3" />
-			</p:selectOneMenu>
+			<p:tab title="Contrato">
+				<h:panelGrid columns="2" cellspacing="15">
+					<p:outputLabel for="dataDoContrato" value="Data do contrato" />
+					<p:calendar id="dataDoContrato" required="true" mask="true"
+						pattern="dd-MM-yyyy"
+						value="#{MBcdt.treinamento.contrato.dataDoContrato}" />
 
-			<p:outputLabel for="formaDePagamento" value="Forma de pagamento" />
-			<p:selectOneMenu id="formaDePagamento" required="true"
-				value="#{MBcdt.formaDePagamentoSelecionado}">
-				<f:selectItem itemLabel="Selecione" itemValue="" />
-				<f:selectItems value="#{MBcdt.formasDePagamento}" var="forma"
-					itemLabel="#{forma}" itemValue="#{forma}" />
-			</p:selectOneMenu>
-		</p:panelGrid>
+					<p:outputLabel value="Valor do contrato" />
+					<h:outputText id="valorDoContrato"
+						value="#{MBcdt.treinamento.contrato.valorDoContrato}">
+						<f:convertNumber type="currency" locale="pt_BR" />
+					</h:outputText>
 
-		<p:panelGrid columns="1">
-			<p:outputLabel for="cursosContratados" value="Cursos contratados" />
-			<p:selectManyCheckbox id="cursosContratados" layout="responsive"
-				columns="1" required="true" value="#{MBcdt.cursosSelecionados}">
-				<f:selectItems value="#{MBcdt.CURSOS}" var="curso"
-					itemLabel="#{curso}" itemValue="#{curso}" />
-			</p:selectManyCheckbox>
-		</p:panelGrid>
+					<p:outputLabel for="metodoDePagamento" value="Método de pagamento" />
+					<p:selectOneMenu id="metodoDePagamento" required="true"
+						value="#{MBcdt.treinamento.contrato.metodoDePagamento}">
+						<p:ajax event="change" process="@this" update="formaDePagamento"
+							listener="#{MBcdt.carregarFormaDePagamento}" />
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItem itemLabel="Cartão de credito" itemValue="1" />
+						<f:selectItem itemLabel="Cheque" itemValue="2" />
+						<f:selectItem itemLabel="Boleto" itemValue="3" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="formaDePagamento" value="Forma de pagamento" />
+					<p:selectOneMenu id="formaDePagamento" required="true"
+						value="#{MBcdt.treinamento.contrato.formaDePagamentoSelecionado}">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItems value="#{MBcdt.formasDePagamento}" var="forma"
+							itemLabel="#{forma}" itemValue="#{forma}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+			</p:tab>
+
+			<p:tab title="Contratos vigentes">
+				<ui:include src="/includes/contratosVigentes.xhtml" />
+			</p:tab>
+
+		</p:tabView>
 
 		<br />
-		<p:commandButton value="Registrar" action="#{MBcdt.registrarDados}"
+		<p:commandButton value="Cadastrar" action="#{MBcdt.registrarDados}"
 			update="@form" />
 	</h:form>
 </h:body>

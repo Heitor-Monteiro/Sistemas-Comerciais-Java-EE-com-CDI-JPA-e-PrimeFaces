@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,17 +12,15 @@ import javax.faces.context.FacesContext;
 public class MBcadastroDeTreinamentos implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String razaoSocial, cnpj;
-	private Cidade cidadeDoContrato;
 	protected static List<Cidade> CIDADES = new ArrayList<>();
-	private Boolean modalidade;
-	private Date dataDoContrato;
-	private double valorDoContrato;
-	private int metodoDePagamento;
+	protected static List<Curso> CURSOS = new ArrayList<>();
 	private List<String> formasDePagamento = new ArrayList<>();
-	private String formaDePagamentoSelecionado;
-	protected static List<String> CURSOS = new ArrayList<>();
-	public List<String> cursosSelecionados = new ArrayList<>();
+	private Treinamento treinamento;
+
+	@PostConstruct
+	public void init() {
+		this.treinamento = new Treinamento();
+	}
 
 	static {
 		CIDADES.add(new Cidade(0, "Belém"));
@@ -30,36 +28,16 @@ public class MBcadastroDeTreinamentos implements Serializable {
 		CIDADES.add(new Cidade(2, "Stº Antônio do Tauá"));
 		CIDADES.add(new Cidade(3, "Stª Izabel do Pará"));
 		CIDADES.add(new Cidade(4, "Capanema"));
-		CURSOS.add("Fundamentos Java e Orientação a Objetos");
-		CURSOS.add("Desenvolvimento Web com JSF 2");
-		CURSOS.add("Persistência de Dados com JPA 2 e Hibernate");
-		CURSOS.add("Gerenciamento Ágil de Projetos com Scrum");
+		CURSOS.add(new Curso(1, "Fundamentos Java e Orientação a Objetos", 920));
+		CURSOS.add(new Curso(2, "Desenvolvimento Web com JSF 2", 810.87));
+		CURSOS.add(new Curso(3, "Persistência de Dados com JPA 2 e Hibernate", 900.50));
+		CURSOS.add(new Curso(4, "Gerenciamento Ágil de Projetos com Scrum", 1020.73));
 	}
 
 	public void registrarDados() {
-		System.out.println("Razão social: " + this.razaoSocial);
-		System.out.println("CNPJ: " + this.cnpj);
-		System.out.println("Cidade do contrato: " + this.cidadeDoContrato.getNomeCidade());
-		System.out.println("Modalidade: " + this.modalidade);
-		System.out.println("Data do contrato: " + this.dataDoContrato);
-		System.out.println("Valor do contrato:" + this.valorDoContrato);
-		System.out.println("Método de pagamento: " + this.metodoDePagamento);
-		System.out.println("Forma de pagamento: " + this.formaDePagamentoSelecionado);
-		System.out.println("Cursos contratados: ");
-		for (String curso : cursosSelecionados) {
-			System.out.println(curso);
-		}
-
-		this.razaoSocial = "";
-		this.cnpj = "";
-		this.cidadeDoContrato = null;
-		this.dataDoContrato = null;
-		this.valorDoContrato = 0;
-		this.metodoDePagamento = 0;
-		this.formaDePagamentoSelecionado = "";
-		this.formasDePagamento.clear();
-		this.cursosSelecionados.clear();
+		BDTreinamentos.TREINAMENTOS.add(this.treinamento);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Registrado com sucesso!"));
+		init();
 	}
 
 	public List<Cidade> sugerirCidades(String consulta) {
@@ -74,7 +52,7 @@ public class MBcadastroDeTreinamentos implements Serializable {
 
 	public void carregarFormaDePagamento() {
 		formasDePagamento.clear();
-		switch (metodoDePagamento) {
+		switch (this.treinamento.getContrato().getMetodoDePagamento()) {
 		case 1:
 			formasDePagamento.add("À vista");
 			formasDePagamento.add("1x");
@@ -94,60 +72,8 @@ public class MBcadastroDeTreinamentos implements Serializable {
 		}
 	}
 
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public Boolean getModalidade() {
-		return modalidade;
-	}
-
-	public void setModalidade(Boolean modalidade) {
-		this.modalidade = modalidade;
-	}
-
-	public Date getDataDoContrato() {
-		return dataDoContrato;
-	}
-
-	public void setDataDoContrato(Date dataDoContrato) {
-		this.dataDoContrato = dataDoContrato;
-	}
-
-	public double getValorDoContrato() {
-		return valorDoContrato;
-	}
-
-	public void setValorDoContrato(double valorDoContrato) {
-		this.valorDoContrato = valorDoContrato;
-	}
-
-	public int getMetodoDePagamento() {
-		return metodoDePagamento;
-	}
-
-	public void setMetodoDePagamento(int metodoDePagamento) {
-		this.metodoDePagamento = metodoDePagamento;
-	}
-
-	public String getFormaDePagamentoSelecionado() {
-		return formaDePagamentoSelecionado;
-	}
-
-	public void setFormaDePagamentoSelecionado(String formaDePagamentoSelecionado) {
-		this.formaDePagamentoSelecionado = formaDePagamentoSelecionado;
+	public List<Treinamento> getTreinamentos() {
+		return BDTreinamentos.TREINAMENTOS;
 	}
 
 	public List<String> getFormasDePagamento() {
@@ -158,23 +84,11 @@ public class MBcadastroDeTreinamentos implements Serializable {
 		return CIDADES;
 	}
 
-	public Cidade getCidadeDoContrato() {
-		return cidadeDoContrato;
-	}
-
-	public void setCidadeDoContrato(Cidade cidadeDoContrato) {
-		this.cidadeDoContrato = cidadeDoContrato;
-	}
-
-	public List<String> getCursosSelecionados() {
-		return cursosSelecionados;
-	}
-
-	public void setCursosSelecionados(List<String> cursosSelecionados) {
-		this.cursosSelecionados = cursosSelecionados;
-	}
-
-	public List<String> getCURSOS() {
+	public List<Curso> getCURSOS() {
 		return CURSOS;
+	}
+
+	public Treinamento getTreinamento() {
+		return treinamento;
 	}
 }

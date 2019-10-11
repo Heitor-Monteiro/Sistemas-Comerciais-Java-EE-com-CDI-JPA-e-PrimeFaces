@@ -1,0 +1,53 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<p:dataTable value="#{MBcdt.treinamentos}" rows="10" paginator="true"
+		paginatorPosition="bottom" rowsPerPageTemplate="10,20,30"
+		paginatorAlwaysVisible="false" emptyMessage="Não há contratos!"
+		var="item">
+		<p:column headerText="CNPJ" style="text-align: center;" width="180"
+			sortBy="#{item.cliente.cnpj}">
+			<h:outputText value="#{item.cliente.cnpj}" />
+		</p:column>
+
+		<p:column headerText="Razão social" style="text-align: center;"
+			sortBy="#{item.cliente.razaoSocial}">
+			<h:outputText value="#{item.cliente.razaoSocial}" />
+		</p:column>
+
+		<p:column headerText="Cidade" style="text-align: center;"
+			sortBy="#{item.contrato.cidadeDoContrato.nomeCidade}">
+			<h:outputText value="#{item.contrato.cidadeDoContrato.nomeCidade}" />
+		</p:column>
+
+		<p:column headerText="Modalidade" style="text-align: center;"
+			width="130" sortBy="#{item.contrato.modalidade}">
+			<h:outputText value="#{item.contrato.modalidade}" />
+		</p:column>
+
+		<p:column headerText="Data do contrato" style="text-align: center;"
+			width="100" sortBy="#{item.contrato.dataDoContrato}">
+			<h:outputText value="#{item.contrato.dataDoContrato}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</p:column>
+
+		<p:column headerText="Pagamento" style="text-align: center;"
+			width="230" sortBy="#{item.contrato.formaDePagamentoSelecionado}">
+			<h:outputText
+				value="#{item.contrato.nomeMetodoPagamento}: 
+				#{item.contrato.formaDePagamentoSelecionado}" />
+		</p:column>
+
+		<p:column headerText="Total" style="text-align: center;" width="100"
+			sortBy="#{item.contrato.valorDoContrato}">
+			<h:outputText value="#{item.contrato.valorDoContrato}">
+				<f:convertNumber type="currency" locale="pt_BR" />
+			</h:outputText>
+		</p:column>
+	</p:dataTable>
+
+</ui:component>
