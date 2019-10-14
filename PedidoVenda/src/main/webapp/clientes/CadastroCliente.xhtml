@@ -16,7 +16,7 @@
 				<p:commandButton id="botaoSalvar" value="Salvar" />
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:button value="Pesquisa" />
+				<p:button value="Pesquisa" outcome="/clientes/PesquisaCliente" />
 			</p:toolbarGroup>
 		</p:toolbar>
 
@@ -39,7 +39,7 @@
 			<p:inputText id="email" required="true" maxlength="100">
 				<f:validateRegex
 					pattern="^[_A-Za-z0-9- \+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-				<p:clientValidator event="keyup"/>
+				<p:clientValidator event="keyup" />
 			</p:inputText>
 
 		</p:panelGrid>
