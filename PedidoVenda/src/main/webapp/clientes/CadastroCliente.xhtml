@@ -8,42 +8,87 @@
 	<ui:define name="titulo">Novo cliente</ui:define>
 
 	<ui:define name="corpo">
-		<h1>Novo cliente</h1>
+		<h:form>
 
-		<p:toolbar style="margin-top: 20px;">
-			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/clientes/CadastroCliente" />
-				<p:commandButton id="botaoSalvar" value="Salvar" />
-			</p:toolbarGroup>
-			<p:toolbarGroup align="right">
-				<p:button value="Pesquisa" outcome="/clientes/PesquisaCliente" />
-			</p:toolbarGroup>
-		</p:toolbar>
+			<h1>Novo cliente</h1>
 
-		<p:panelGrid id="painel" columns="2"
-			style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+			<p:toolbar style="margin-top: 20px;">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+					<p:commandButton id="botaoSalvar" value="Salvar" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/clientes/PesquisaCliente" />
+				</p:toolbarGroup>
+			</p:toolbar>
 
-			<p:outputLabel for="nome" value="Nome" />
-			<p:inputText id="nome" required="true" size="60" maxlength="80" />
+			<p:panelGrid id="painel" columns="2"
+				style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
 
-			<p:outputLabel for="tipo" value="Tipo" />
-			<p:selectOneRadio id="tipo" required="true" columns="2">
-				<f:selectItem itemLabel="Física" itemValue="0" />
-				<f:selectItem itemLabel="Jurídica" itemValue="1" />
-			</p:selectOneRadio>
+				<p:outputLabel for="nome" value="Nome" />
+				<p:inputText id="nome" required="true" size="60" maxlength="80" />
 
-			<p:outputLabel for="cnpj" value="CNPJ" />
-			<p:inputMask id="cnpj" required="true" mask="99.999.999/9999-99" />
+				<p:outputLabel for="tipo" value="Tipo" />
+				<p:selectOneRadio id="tipo" required="true" columns="2"
+					value="#{cadastroClienteBean.tipoPessoa}">
+					<p:ajax event="change" process="@this"
+						update="cpfCnpj,labelCpfCnpj"
+						listener="#{cadastroClienteBean.definirMaskTipoPessoa}" />
+					<f:selectItem itemLabel="Física" itemValue="true" />
+					<f:selectItem itemLabel="Jurídica" itemValue="false" />
+				</p:selectOneRadio>
 
-			<p:outputLabel for="email" value="E-mail" />
-			<p:inputText id="email" required="true" maxlength="100">
-				<f:validateRegex
-					pattern="^[_A-Za-z0-9- \+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-				<p:clientValidator event="keyup" />
-			</p:inputText>
+				<p:outputLabel id="labelCpfCnpj" for="cpfCnpj"
+					value="#{cadastroClienteBean.labelCpfCnpj}" />
+				<p:inputMask id="cpfCnpj" required="true"
+					mask="#{cadastroClienteBean.maskCpfCnpj}" />
 
-		</p:panelGrid>
+				<p:outputLabel for="email" value="E-mail" />
+				<p:inputText id="email" required="true" maxlength="100">
+					<f:validateRegex
+						pattern="^[_A-Za-z0-9- \+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					<p:clientValidator event="keyup" />
+					<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+				</p:inputText>
 
+			</p:panelGrid>
+
+			<p:commandButton value="Adicionar endereço" style="margin-top: 20px;" />
+
+			<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
+				var="endereco" rows="10" rowsPerPageTemplate="10,20,30"
+				paginator="true" paginatorAlwaysVisible="false"
+				style="margin-top: 20px;" paginatorPosition="bottom"
+				emptyMessage="Nenhum endereço encontrado.">
+
+				<p:column headerText="Logradouro" style="text-align: left;">
+					<h:outputText value="Rua das Pedras Grandes Azuis" />
+				</p:column>
+
+				<p:column headerText="Número" width="80" style="text-align: left;">
+					<h:outputText value="1234" />
+				</p:column>
+
+				<p:column headerText="Complemento" style="text-align: left;">
+					<h:outputText value="Próximo ao hospital" />
+				</p:column>
+
+				<p:column headerText="CEP" width="80" style="text-align: left;">
+					<h:outputText value="99888-555" />
+				</p:column>
+
+				<p:column headerText="Cidade/UF" style="text-align: left;">
+					<h:outputText value="Belém/PA" />
+				</p:column>
+
+				<p:column width="70" style="text-align: center;">
+					<p:button icon="ui-icon-pencil" title="Editar" />
+					<p:button icon="ui-icon-trash" title="Excluir" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
 	</ui:define>
 
 </ui:composition>
