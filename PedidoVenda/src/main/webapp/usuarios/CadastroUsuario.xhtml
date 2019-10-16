@@ -31,13 +31,39 @@
 				<f:validateRegex
 					pattern="^[_A-Za-z0-9- \+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 				<p:clientValidator event="keyup" />
+				<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
 			</p:inputText>
 
 			<p:outputLabel for="senha" value="Senha" />
 			<p:password id="senha" required="true" feedback="true"
-				weakLabel="fraca" goodLabel="Mediana" strongLabel="Forte" />
+				weakLabel="fraca" goodLabel="Mediana" strongLabel="Forte"
+				promptLabel="Por favor insira uma senha" />
+
+			<p:selectOneMenu>
+				<f:selectItem itemLabel="Selecione" itemValue="" />
+				<f:selectItem itemLabel="Administradores" itemValue="1" />
+				<f:selectItem itemLabel="Auxiliares" itemValue="2" />
+				<f:selectItem itemLabel="Vendedores" itemValue="3" />
+			</p:selectOneMenu>
+			<p:commandButton value="Adicionar grupo" icon="ui-icon-plus" />
 
 		</p:panelGrid>
+
+		<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
+			var="cliente" rows="10" rowsPerPageTemplate="10,20,30"
+			paginator="true" paginatorAlwaysVisible="false"
+			style="margin-top: 11px;" paginatorPosition="bottom"
+			emptyMessage="Nenhum grupo encontrado.">
+
+			<p:column headerText="Grupo" style="text-align: left;">
+				<h:outputText value="Auxiliares" />
+			</p:column>
+
+			<p:column width="33" style="text-align: center;">
+				<p:button icon="ui-icon-close" title="Excluir" />
+			</p:column>
+
+		</p:dataTable>
 
 	</ui:define>
 
