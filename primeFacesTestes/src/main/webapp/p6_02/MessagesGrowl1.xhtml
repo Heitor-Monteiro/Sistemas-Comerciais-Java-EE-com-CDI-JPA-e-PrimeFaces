@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>6.2</title>
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<!-- Sem autoUpdate -->
+		<!-- <p:messages id="msg" /> -->
+
+		<!-- Com autoUpdate -->
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:growl sticky="true">
+			<p:autoUpdate />
+		</p:growl>
+
+		<p:outputLabel for="nome" value="Nome" />
+		<p:inputText id="nome" required="true" />
+
+		<!-- Com autoUpdate o commandButton não 
+		necessitar da propriedade update com o id 
+		do messages informado. -->
+		<p:commandButton value="Enviar" />
+
+	</h:form>
+
+	<p:separator />
+	<p:link value="Telas inicial" outcome="/index" />
+
+</h:body>
+</html>
