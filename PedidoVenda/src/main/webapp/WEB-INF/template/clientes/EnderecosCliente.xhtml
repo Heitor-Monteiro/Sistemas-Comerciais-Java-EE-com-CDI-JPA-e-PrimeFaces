@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:commandButton value="Adicionar endereço" style="margin-top: 20px;" />
+
+	<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
+		var="endereco" rows="10" rowsPerPageTemplate="10,20,30"
+		paginator="true" paginatorAlwaysVisible="false"
+		style="margin-top: 20px;" paginatorPosition="bottom"
+		emptyMessage="Nenhum endereço encontrado.">
+
+		<p:column headerText="Logradouro" style="text-align: left;">
+			<h:outputText value="Rua das Pedras Grandes Azuis" />
+		</p:column>
+
+		<p:column headerText="Número" width="80" style="text-align: left;">
+			<h:outputText value="1234" />
+		</p:column>
+
+		<p:column headerText="Complemento" style="text-align: left;">
+			<h:outputText value="Próximo ao hospital" />
+		</p:column>
+
+		<p:column headerText="CEP" width="80" style="text-align: left;">
+			<h:outputText value="99888-555" />
+		</p:column>
+
+		<p:column headerText="Cidade/UF" style="text-align: left;">
+			<h:outputText value="Belém/PA" />
+		</p:column>
+
+		<p:column width="70" style="text-align: center;">
+			<p:button icon="ui-icon-pencil" title="Editar" />
+			<p:button icon="ui-icon-trash" title="Excluir" />
+		</p:column>
+
+	</p:dataTable>
+
+</ui:composition>

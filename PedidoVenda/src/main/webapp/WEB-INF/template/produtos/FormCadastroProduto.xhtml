@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid id="painel" columns="2"
+		style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+
+		<p:outputLabel for="sku" value="SKU" />
+		<p:inputText id="sku" size="20" maxlength="20" />
+
+		<p:outputLabel for="nome" value="Nome" />
+		<p:inputText id="nome" size="60" maxlength="80" />
+
+		<p:outputLabel for="categoria" value="Categoria" />
+		<p:selectOneMenu id="categoria">
+			<f:selectItem itemLabel="Selecione a categoria" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="subCategoria" value="Subcategoria" />
+		<p:selectOneMenu id="subCategoria">
+			<f:selectItem itemLabel="Selecione a subcategoria" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="valorUnitario" value="Valor unitário" />
+		<p:inputNumber id="valorUnitario" size="10" maxlength="10"
+			symbol="R$ " decimalSeparator="," thousandSeparator="." />
+
+		<p:outputLabel for="estoque" value="Estoque" />
+		<p:inputText id="estoque" size="10" maxlength="4" />
+
+	</p:panelGrid>
+
+</ui:composition>

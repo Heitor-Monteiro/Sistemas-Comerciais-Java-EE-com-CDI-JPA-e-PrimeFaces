@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid id="painel" columns="2"
+		style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+
+		<p:outputLabel for="nome" value="Nome" />
+		<p:inputText id="nome" required="true" size="60" maxlength="80" />
+
+		<p:outputLabel for="tipo" value="Tipo" />
+		<p:selectOneRadio id="tipo" required="true" columns="2"
+			value="#{cadastroClienteBean.tipoPessoa}">
+			<p:ajax event="change" process="@this" update="cpfCnpj,labelCpfCnpj"
+				listener="#{cadastroClienteBean.definirMaskTipoPessoa}" />
+			<f:selectItem itemLabel="Física" itemValue="true" />
+			<f:selectItem itemLabel="Jurídica" itemValue="false" />
+		</p:selectOneRadio>
+
+		<p:outputLabel id="labelCpfCnpj" for="cpfCnpj"
+			value="#{cadastroClienteBean.labelCpfCnpj}" />
+		<p:inputMask id="cpfCnpj" required="true"
+			mask="#{cadastroClienteBean.maskCpfCnpj}" />
+
+		<p:outputLabel for="email" value="E-mail" />
+		<p:inputText id="email" required="true" maxlength="100">
+			<f:validateRegex
+				pattern="^[_A-Za-z0-9- \+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			<p:clientValidator event="keyup" />
+			<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+		</p:inputText>
+
+	</p:panelGrid>
+
+</ui:composition>

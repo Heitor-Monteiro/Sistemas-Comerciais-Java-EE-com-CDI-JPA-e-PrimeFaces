@@ -8,56 +8,19 @@
 	<ui:define name="titulo">Pesquisa de cliente</ui:define>
 
 	<ui:define name="corpo">
-		<h1>Pesquisa de cliente</h1>
+		<h:form>
 
-		<p:toolbar style="margin-top: 20px;">
-			<p:toolbarGroup>
-				<p:commandButton value="Pesquisar" />
-			</p:toolbarGroup>
-			<p:toolbarGroup align="right">
-				<p:button value="Novo" outcome="/clientes/CadastroCliente" />
-			</p:toolbarGroup>
-		</p:toolbar>
+			<h1>Pesquisa de cliente</h1>
 
-		<p:panelGrid id="painel" columns="2" styleClass="panelgrid-noborder"
-			style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+			<ui:include
+				src="/WEB-INF/template/clientes/BotoesPesquisaCliente.xhtml" />
 
-			<p:outputLabel for="cpfCnpj" value="CPF/CNPJ" />
-			<p:inputText id="cpfCnpj" required="true" maxlength="14">
-				<p:keyFilter regEx="/[\d\-\.]/" />
-			</p:inputText>
+			<ui:include
+				src="/WEB-INF/template/clientes/CapaPesquisaCliente.xhtml" />
 
-			<p:outputLabel for="nome" value="Nome" />
-			<p:inputText id="nome" required="true" size="60" maxlength="80" />
+			<ui:include src="/WEB-INF/template/clientes/TabelaClientes.xhtml" />
 
-		</p:panelGrid>
-
-		<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
-			var="cliente" rows="10" rowsPerPageTemplate="10,20,30"
-			paginator="true" paginatorAlwaysVisible="false"
-			style="margin-top: 20px;" paginatorPosition="bottom"
-			emptyMessage="Nenhum cliente encontrado.">
-
-			<p:column headerText="Nome" style="text-align: left;">
-				<h:outputText value="hbvjhdj" />
-			</p:column>
-
-			<p:column headerText="Tipo" width="50" style="text-align: left;">
-				<h:outputText value="Jurídica" />
-			</p:column>
-
-			<p:column headerText="CPF/CNPJ" width="130" style="text-align: left;">
-				<h:outputText value="88.671.051/0001-96" />
-			</p:column>
-
-			<p:column width="70" style="text-align: center;">
-				<p:button icon="ui-icon-pencil" title="Editar" />
-				<p:button icon="ui-icon-trash" title="Excluir" />
-			</p:column>
-
-		</p:dataTable>
-
-
+		</h:form>
 	</ui:define>
 
 </ui:composition>

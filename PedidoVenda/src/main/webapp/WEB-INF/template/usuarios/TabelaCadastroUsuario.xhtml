@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
+		var="item" rows="10" rowsPerPageTemplate="10,20,30" paginator="true"
+		paginatorAlwaysVisible="false" style="margin-top: 11px;"
+		paginatorPosition="bottom" emptyMessage="Nenhum grupo encontrado.">
+
+		<p:column headerText="Grupo" style="text-align: left;">
+			<h:outputText value="Auxiliares" />
+		</p:column>
+
+		<p:column width="33" style="text-align: center;">
+			<p:button icon="ui-icon-close" title="Excluir" />
+		</p:column>
+
+	</p:dataTable>
+
+</ui:composition>

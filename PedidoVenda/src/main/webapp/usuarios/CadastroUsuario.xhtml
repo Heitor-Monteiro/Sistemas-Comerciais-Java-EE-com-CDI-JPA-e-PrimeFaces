@@ -10,60 +10,13 @@
 	<ui:define name="corpo">
 		<h1>Novo usuário</h1>
 
-		<p:toolbar style="margin-top: 20px;">
-			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
-				<p:commandButton id="botaoSalvar" value="Salvar" />
-			</p:toolbarGroup>
-			<p:toolbarGroup align="right">
-				<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuario" />
-			</p:toolbarGroup>
-		</p:toolbar>
+		<ui:include
+			src="/WEB-INF/template/usuarios/BotoesCadastroUsuario.xhtml" />
 
-		<p:panelGrid id="painel" columns="2"
-			style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+		<ui:include src="/WEB-INF/template/usuarios/FormCadastroUsuario.xhtml" />
 
-			<p:outputLabel for="nome" value="Nome" />
-			<p:inputText id="nome" required="true" size="60" maxlength="80" />
-
-			<p:outputLabel for="email" value="E-mail" />
-			<p:inputText id="email" required="true" size="60" maxlength="80">
-				<f:validateRegex
-					pattern="^[_A-Za-z0-9- \+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-				<p:clientValidator event="keyup" />
-				<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
-			</p:inputText>
-
-			<p:outputLabel for="senha" value="Senha" />
-			<p:password id="senha" required="true" feedback="true"
-				weakLabel="fraca" goodLabel="Mediana" strongLabel="Forte"
-				promptLabel="Por favor insira uma senha" />
-
-			<p:selectOneMenu>
-				<f:selectItem itemLabel="Selecione" itemValue="" />
-				<f:selectItem itemLabel="Administradores" itemValue="1" />
-				<f:selectItem itemLabel="Auxiliares" itemValue="2" />
-				<f:selectItem itemLabel="Vendedores" itemValue="3" />
-			</p:selectOneMenu>
-			<p:commandButton value="Adicionar grupo" icon="ui-icon-plus" />
-
-		</p:panelGrid>
-
-		<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
-			var="cliente" rows="10" rowsPerPageTemplate="10,20,30"
-			paginator="true" paginatorAlwaysVisible="false"
-			style="margin-top: 11px;" paginatorPosition="bottom"
-			emptyMessage="Nenhum grupo encontrado.">
-
-			<p:column headerText="Grupo" style="text-align: left;">
-				<h:outputText value="Auxiliares" />
-			</p:column>
-
-			<p:column width="33" style="text-align: center;">
-				<p:button icon="ui-icon-close" title="Excluir" />
-			</p:column>
-
-		</p:dataTable>
+		<ui:include
+			src="/WEB-INF/template/usuarios/TabelaCadastroUsuario.xhtml" />
 
 	</ui:define>
 

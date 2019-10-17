@@ -10,43 +10,12 @@
 	<ui:define name="corpo">
 		<h1>Pesquisa de usuários</h1>
 
-		<p:toolbar style="margin-top: 20px;">
-			<p:toolbarGroup>
-				<p:commandButton value="Pesquisar" />
-			</p:toolbarGroup>
-			<p:toolbarGroup align="right">
-				<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
-			</p:toolbarGroup>
-		</p:toolbar>
+		<ui:include
+			src="/WEB-INF/template/usuarios/BotoesFormPesquisaUsuario.xhtml" />
 
-		<p:panelGrid id="painel" columns="2" 
-			style="width: 100%; margin-top: 20px;" columnClasses="rotulo, campo">
+		<ui:include
+			src="/WEB-INF/template/usuarios/TabelaPesquisaUsuario.xhtml" />
 
-			<p:outputLabel for="nome" value="Nome" />
-			<p:inputText id="nome" required="true" size="60" maxlength="80" />
-
-		</p:panelGrid>
-
-		<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
-			var="cliente" rows="10" rowsPerPageTemplate="10,20,30"
-			paginator="true" paginatorAlwaysVisible="false"
-			style="margin-top: 20px;" paginatorPosition="bottom"
-			emptyMessage="Nenhum cliente encontrado.">
-
-			<p:column headerText="Nome" style="text-align: left;">
-				<h:outputText value="hbvjhdj" />
-			</p:column>
-
-			<p:column headerText="E-mail" width="350" style="text-align: left;">
-				<h:outputText value="beltrano.silva@gmail.com" />
-			</p:column>
-
-			<p:column width="70" style="text-align: center;">
-				<p:button icon="ui-icon-pencil" title="Editar" />
-				<p:button icon="ui-icon-trash" title="Excluir" />
-			</p:column>
-
-		</p:dataTable>
 	</ui:define>
 
 </ui:composition>
