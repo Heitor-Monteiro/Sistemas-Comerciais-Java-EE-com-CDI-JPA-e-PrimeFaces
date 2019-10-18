@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>6.3</title>
+</h:head>
+<h:body>
+
+	<script>
+		function tratarInclusaoProduto(args) {
+			if (!args.validationFailed) {
+				PF('inclusaoProdutoDialogo').hide();
+			}
+		}
+	</script>
+
+	<h:form id="frm">
+
+		<p:commandButton value="Adicionar produto"
+			onclick="PF('inclusaoProdutoDialogo').show();" />
+
+		<p:dataTable id="produtosTable" value="#{produtosBean.produtos}"
+			var="produto" emptyMessage="Não existem produtos.">
+			<p:column headerText="Produto">
+				<h:outputText value="#{produto}" />
+			</p:column>
+		</p:dataTable>
+
+
+		<p:dialog header="Inclusão de produto"
+			widgetVar="inclusaoProdutoDialogo" draggable="false"
+			resizable="false" modal="true">
+			<h:panelGroup id="inclusaoPanel">
+				<p:messages id="msg" />
+
+				<h:panelGrid columns="2">
+					<p:outputLabel for="nomeProduto" value="Nome" />
+					<p:inputText id="nomeProduto" value="#{produtosBean.nomeProsuto}"
+						required="true" requiredMessage="Informe o nome do produto." />
+				</h:panelGrid>
+
+				<p:commandButton value="Incluir"
+					action="#{produtosBean.incluirProduto}"
+					update="produtosTable inclusaoPanel msg"
+					oncomplete="tratarInclusaoProduto(args)" />
+			</h:panelGroup>
+		</p:dialog>
+
+	</h:form>
+
+	<p:separator />
+	<p:link value="Telas inicial" outcome="/index" />
+
+</h:body>
+</html>
