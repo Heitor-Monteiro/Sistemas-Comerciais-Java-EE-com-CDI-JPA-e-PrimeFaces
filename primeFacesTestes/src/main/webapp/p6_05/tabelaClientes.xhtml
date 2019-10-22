@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable id="clientesTable" value="#{mBclienteControl.clientes}"
+		var="cliente" emptyMessage="Não existe clientes registrados.">
+
+		<p:column headerText="Nome">
+			<h:outputText value="#{cliente.nomeCliente}" />
+		</p:column>
+
+		<p:column headerText="Telefone">
+			<h:outputText value="#{cliente.telefone}" />
+		</p:column>
+
+		<p:column width="40">
+			<p:commandButton icon="ui-icon-trash" process="@this"
+				oncomplete="PF('confirmacao').show();">
+				<f:setPropertyActionListener value="#{cliente}"
+					target="#{mBclienteControl.clienteSelecionado}" />
+			</p:commandButton>
+		</p:column>
+
+	</p:dataTable>
+
+</ui:composition>

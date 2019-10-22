@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:confirmDialog header="Exclusão de cliente"
+		message="Tem certeza que deseja excluir o cliente?"
+		widgetVar="confirmacao">
+		<p:commandButton value="Sim" update="clientesTable" process="@this"
+			action="#{mBclienteControl.excluirCliente}"
+			oncomplete="PF('confirmacao').hide();" />
+		<p:commandButton value="Não" oncomplete="PF('confirmacao').hide();" />
+	</p:confirmDialog>
+
+
+
+	<p:dialog header="Inclusão de cliente" widgetVar="inclusaoCliente"
+		draggable="false" resizable="false" modal="true">
+		<h:panelGroup id="inclusaoPanel">
+			<p:messages id="msg" />
+
+			<h:panelGrid columns="2">
+				<p:outputLabel for="nomeCliente" value="Nome" />
+				<p:inputText id="nomeCliente"
+					value="#{mBclienteControl.cliente.nomeCliente}" required="true"
+					requiredMessage="Informe o nome do cliente" />
+
+				<p:outputLabel for="telefone" value="Telefone" />
+				<p:inputMask id="telefone" mask="(99) 99999-9999"
+					value="#{mBclienteControl.cliente.telefone}" required="true"
+					requiredMessage="Informe o telefone do cliente" />
+			</h:panelGrid>
+
+			<p:commandButton value="Incluir"
+				action="#{mBclienteControl.incluirCliente}"
+				update="clientesTable inclusaoPanel msg"
+				oncomplete="tratarInclusaoClientes(args)" />
+		</h:panelGroup>
+	</p:dialog>
+
+</ui:composition>
