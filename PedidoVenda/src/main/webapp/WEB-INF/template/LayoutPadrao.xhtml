@@ -35,8 +35,8 @@
 		<h:form style="display: inline-block;">
 			<p:menubar styleClass="menu-sistema">
 				<p:submenu label="Cadastros">
-					<p:menuitem value="Clientes" />
-					<p:menuitem value="Usuários" />
+					<p:menuitem value="Clientes" outcome="/clientes/PesquisaCliente" />
+					<p:menuitem value="Usuários" outcome="/usuarios/PesquisaUsuario" />
 					<p:separator />
 					<p:menuitem value="Categorias" />
 					<p:menuitem value="Produtos" outcome="/produtos/PesquisaProdutos" />
@@ -45,7 +45,7 @@
 					<p:menuitem value="Novo pedido" outcome="/pedidos/CadastroPedido" />
 					<p:menuitem value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
 				</p:submenu>
-				<p:menuitem value="Sair" />
+				<p:menuitem value="Sair" outcome="/Login" />
 			</p:menubar>
 		</h:form>
 	</div>
