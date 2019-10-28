@@ -4,7 +4,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:commandButton value="Adicionar endereço" style="margin-top: 20px;" />
+	<p:commandButton value="Adicionar endereço"
+		oncomplete="PF('cadEndereco').show()" style="margin-top: 20px;" />
 
 	<p:dataTable value="#{pesquisaProdutosBean.produtosFiltrados}"
 		var="endereco" rows="10" rowsPerPageTemplate="10,20,30"
@@ -38,5 +39,39 @@
 		</p:column>
 
 	</p:dataTable>
+
+	<p:dialog header="Inclusão de endereço" widgetVar="cadEndereco"
+		resizable="false" modal="true" draggable="false">
+		<p:messages>
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:panelGrid id="cadEnd" columns="2">
+			<p:outputLabel for="logradouro" value="Logradouro" />
+			<p:inputText id="logradouro" size="35" maxlength="50" required="true" />
+
+			<p:outputLabel for="numero" value="Número" />
+			<p:inputText id="numero" maxlength="10" size="8" required="true" />
+
+			<p:outputLabel value="Complemento" />
+			<p:inputText size="20" maxlength="43" />
+
+			<p:outputLabel value="CEP" />
+			<p:inputMask mask="99999-999" size="6" />
+
+			<p:outputLabel for="cidade" value="Cidade" />
+			<h:panelGroup>
+				<p:inputText id="cidade" size="20" maxlength="43" required="true" />
+				<p:outputLabel for="uf" value="UF" style="margin: 0 18px 0 18px;" />
+				<p:selectOneMenu id="uf" required="true">
+					<f:selectItem itemLabel=" --- " itemValue="" />
+					<f:selectItem itemLabel="PA" itemDescription="Pará" />
+				</p:selectOneMenu>
+			</h:panelGroup>
+
+			<h:panelGroup />
+			<p:commandButton value="Incluir" update="cadEnd" />
+		</p:panelGrid>
+	</p:dialog>
 
 </ui:composition>
