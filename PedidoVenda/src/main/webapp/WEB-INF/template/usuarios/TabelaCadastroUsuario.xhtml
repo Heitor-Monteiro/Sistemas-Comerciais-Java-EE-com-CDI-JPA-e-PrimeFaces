@@ -14,9 +14,19 @@
 		</p:column>
 
 		<p:column width="33" style="text-align: center;">
-			<p:button icon="ui-icon-close" title="Excluir" />
+			<p:commandButton icon="ui-icon-close" title="Excluir"
+				oncomplete="PF('removerGrupo').show();" />
 		</p:column>
 
 	</p:dataTable>
+
+	<p:confirmDialog header="Exclusão de grupo"
+		message="Tem certeza que deseja remover este grupo?"
+		widgetVar="removerGrupo">
+		<p:commandButton value="Sim" process="@this"
+			oncomplete="PF('removerGrupo').hide();" />
+		<p:commandButton value="Não" process="@this"
+			oncomplete="PF('removerGrupo').hide();" />
+	</p:confirmDialog>
 
 </ui:composition>
